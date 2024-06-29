@@ -1,0 +1,4 @@
+[submodule "src/ultralytics_ros"]
+	path = src/ultralytics_ros
+	url = git@github.com:yukiharada1228/ultralytics_ros.git
+	branch = noetic-devel-world

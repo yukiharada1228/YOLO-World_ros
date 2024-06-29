@@ -1,0 +1,32 @@
+<launch>
+  <arg name="debug" default="true"/>
+
+  <!-- Include the image publisher launch file -->
+  <include file="$(find image_publisher)/launch/image_publisher.launch">
+    <arg name="debug" default="false"/>
+    <arg name="image_dir" value="/home/ubuntu/catkin_ws/data/ARCdataset_png/val/rgb/"/>
+    <arg name="topic" value="/image_topic"/>
+    <arg name="hz" value="0.5"/>
+  </include>
+
+  <!-- Include the tracker node launch file -->
+  <include file="$(find ultralytics_ros)/launch/tracker.launch">
+    <arg name="debug" default="true"/>
+    <arg name="yolo_model" value="yolov8m-worldv2.pt"/>
+    <arg name="input_topic" value="/image_topic"/>
+    <arg name="result_topic" value="/yolo_result"/>
+    <arg name="result_image_topic" value="/yolo_image"/>
+    <arg name="conf_thres" value="0.25"/>
+    <arg name="iou_thres" value="0.45"/>
+    <arg name="max_det" value="300"/>
+    <arg name="classes" default="[Binder,Balloons,Baby_Wipes,Toilet_Brush,Toothbrushes,Crayons,Salts,DVD,Glue_Sticks,Eraser,Scissors,Green_Book,Socks,Irish_Spring,Paper_Tape,Touch_Tissues,Knit_Gloves,Laugh_Out_Loud_Jokes,Pencil_Cup,Mini_Marbles,Neoprene_Weight,Wine_Glasses,Water_Bottle,Reynolds_Pie,Reynolds_Wrap,Robots_Everywhere,Duct_Tape,Sponges,Speed_Stick,Index_Cards,Ice_Cube_Tray,Table_Cover,Measuring_Spoons,Bath_Sponge,Pencils,Mousetraps,Face_Cloth,Tennis_Balls,Spray_Bottle,Flashlights]"/>
+    <arg name="tracker" value="bytetrack.yaml"/>
+    <arg name="device" value=""/>
+    <arg name="result_conf" value="true"/>
+    <arg name="result_line_width" value="1"/>
+    <arg name="result_font_size" value="1"/>
+    <arg name="result_font" value="Arial.ttf"/>
+    <arg name="result_labels" value="true"/>
+    <arg name="result_boxes" value="true"/>
+  </include>
+</launch>

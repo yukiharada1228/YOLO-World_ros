@@ -1,0 +1,11 @@
+services:
+  ultralytics_ros:
+    build: .
+    container_name: ultralytics_ros_container
+    ports:
+      - "6080:80"
+    volumes:
+      - ./src:/home/ubuntu/catkin_ws/src
+      - ./data:/home/ubuntu/catkin_ws/data
+      - ./setup.sh:/home/ubuntu/catkin_ws/setup.sh
+    shm_size: '512m'

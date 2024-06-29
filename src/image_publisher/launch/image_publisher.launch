@@ -1,0 +1,17 @@
+<launch>
+  <arg name="debug" default="true"/>
+  <arg name="image_dir" default="/home/ubuntu/catkin_ws/data/ARCdataset_png/val/rgb/"/>
+  <arg name="topic" default="/image_topic"/>
+  <arg name="hz" default="0.5"/>
+
+  <node name="image_publisher" pkg="image_publisher" type="image_publisher_node" output="screen">
+    <param name="image_dir" value="$(arg image_dir)"/>
+    <param name="topic" value="$(arg topic)"/>
+    <param name="hz" value="$(arg hz)"/>
+  </node>
+
+  <!-- Optionally include the image_view node if debug is true -->
+  <node if="$(arg debug)" name="image_view_publisher" pkg="image_view" type="image_view" output="screen">
+    <remap from="image" to="$(arg topic)"/>
+  </node>
+</launch>
